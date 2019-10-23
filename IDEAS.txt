@@ -1,0 +1,34 @@
+IDEAS
+- Bollywood physics applies to everything BUT the player (player jumps and runs normally) - BOLLYWOOD
+- Multiplayer arena game where players cant see each other and use fucked up physics objects to deal damage - BOLLYWOOD & TOGETHER
+- 2D platformer, slingshot across to the next stage, have to lower bridge to get maximum slingshot distance - BOLYWOOD
+- Puzzle type 2 player co-op platformer - TOGETHER ALONE (& BOLLYWOOD)
+- one player person, other player ghost, trying to get out together, ghost helps player, using special powers, to escape - TOGETHER ALONE
+- GTA style game where you run over wierd shit - WTF DID I RUN OVER
+- Bollywood Physics ONLY applies to the player - BOLLYWOOD
+
+VOting
+1) 
+2) 111
+3) 
+4) 11
+*5) 1111
+6) 11
+7) 1
+
+
+- Two Player Co-op 
+	- Location: Haunted House/Mansion
+	- Mood/Feel: Realistic Horror
+
+	- Player 1 - Ghost
+		- completely free movement
+			- no collisions
+		- Distance from human player obscures ghosts vision
+		- Ghost's vision when possessing is determined by the object
+			- Doll = can see
+	- Player 2 - Human
+		- 1st perspective view
+		- cannot walk through solid objects
+		- can interact with objects
+		- Basic physics
