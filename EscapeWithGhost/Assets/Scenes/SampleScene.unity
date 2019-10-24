@@ -172,7 +172,8 @@ MonoBehaviour:
   playerIndex: 1
   canInput: 1
   moveSpeed: 3
-  jumpForce: 50
+  jumpForce: 300
+  isJumping: 0
 --- !u!136 &112909884
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -300,7 +301,8 @@ MonoBehaviour:
   playerIndex: 2
   canInput: 1
   moveSpeed: 3
-  jumpForce: 50
+  jumpForce: 300
+  isJumping: 0
 --- !u!136 &574252782
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -388,7 +390,7 @@ GameObject:
   - component: {fileID: 660249226}
   - component: {fileID: 660249225}
   - component: {fileID: 660249224}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -571,7 +573,7 @@ GameObject:
   - component: {fileID: 723928277}
   - component: {fileID: 723928276}
   - component: {fileID: 723928275}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Obstacle (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -746,7 +748,7 @@ GameObject:
   - component: {fileID: 1043200755}
   - component: {fileID: 1043200754}
   - component: {fileID: 1043200753}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -838,7 +840,7 @@ GameObject:
   - component: {fileID: 1150920415}
   - component: {fileID: 1150920414}
   - component: {fileID: 1150920413}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Obstacle (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -930,7 +932,7 @@ GameObject:
   - component: {fileID: 1255470000}
   - component: {fileID: 1255469999}
   - component: {fileID: 1255469998}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Obstacle (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1022,7 +1024,7 @@ GameObject:
   - component: {fileID: 1542410347}
   - component: {fileID: 1542410346}
   - component: {fileID: 1542410345}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Obstacle (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1197,7 +1199,7 @@ GameObject:
   - component: {fileID: 1956774586}
   - component: {fileID: 1956774585}
   - component: {fileID: 1956774584}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Obstacle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
