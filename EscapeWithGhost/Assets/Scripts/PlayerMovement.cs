@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
@@ -48,14 +49,10 @@ public class PlayerMovement : MonoBehaviour
             float horizAxis = Input.GetAxis("Axis1_P" + playerIndex); //horizontal axis (left/right)
             float vertAxis = Input.GetAxis("Axis2_P" + playerIndex); //vertical axis (forward/back)
 
-            if (horizAxis > 0)
-                Move(Vector3.right * horizAxis);
-            else if (horizAxis < 0)
+            if (horizAxis > 0 || horizAxis < 0)
                 Move(Vector3.right * horizAxis);
 
-            if (vertAxis < 0)
-                Move(Vector3.forward * -vertAxis);
-            else if (vertAxis > 0)
+            if (vertAxis < 0 || vertAxis > 0)
                 Move(Vector3.forward * -vertAxis);
             #endregion
 
