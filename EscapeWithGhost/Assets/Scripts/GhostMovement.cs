@@ -15,7 +15,7 @@ public class GhostMovement : MonoBehaviour
     float turnSpeed = 90.0f;
 
     [SerializeField]
-    Transform cameraPivot = null;
+    bool invertVertCameraLook = false;
 
     // Start is called before the first frame update
     void Start()
@@ -71,22 +71,19 @@ public class GhostMovement : MonoBehaviour
 
             if (vertCameraAxis > 0 || vertCameraAxis < 0)
             {
-                Quaternion rotationMin = Quaternion.Euler(new Vector3(-85.0f, 0, 0));
-                Quaternion rotationMax = Quaternion.Euler(new Vector3(85.0f, 0, 0));
+                if (!invertVertCameraLook)
+                    transform.root.Rotate(Vector3.right * -vertCameraAxis * turnSpeed * Time.deltaTime, Space.Self);
+                else
+                    transform.root.Rotate(Vector3.right * vertCameraAxis * turnSpeed * Time.deltaTime, Space.Self);
 
-                Quaternion rotation = transform.root.rotation;
+                /* If anyone wants to help with this = this is the most fullproof code for locking rotation between angles but still doesnt fully lock
+                //Vector3 angles = transform.root.eulerAngles;
 
-                rotation.x += Quaternion.Euler(new Vector3(-vertCameraAxis * turnSpeed * Time.deltaTime, 0, 0)).x;
-
-                if (rotation.x < rotationMin.x)
-                    rotation.x = rotationMin.x;
-                else if (rotation.x > rotationMax.x)
-                    rotation.x = rotationMax.x;
-
-                //transform.root.localRotation.SetFromToRotation(transform.root.localEulerAngles, rotation.eulerAngles);
-
-                //transform.root.Rotate(Vector3.right * -vertCameraAxis * turnSpeed * Time.deltaTime, Space.Self);
-                
+                //if (vertCameraAxis < 0 && angles.x < 90 && angles.x >= 85)
+                //    transform.root.rotation = Quaternion.Euler(85, angles.y, angles.z);
+                //else if (vertCameraAxis > 0 && angles.x > 270 && angles.x < 275)
+                //    transform.root.rotation = Quaternion.Euler(275, angles.y, angles.z);
+                */
             }
 
             #endregion
