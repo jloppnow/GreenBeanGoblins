@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //Get the animator if there is one (not used yet)
         anim = GetComponent<Animator>();
+
     }
 
     /// <summary>
@@ -62,12 +63,32 @@ public class PlayerMovement : MonoBehaviour
             {
                 //start a new task = coroutine plays outside of update
                 StartCoroutine(CheckGround());
-                isJumping = true; //the character is jumping
+                isJumping = true; //the character is jumping                
                 transform.GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce);
+                Debug.Log("Start jumping!!");
             }
 
             #endregion
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //Debug.Log("Entered trigger: " + other.name);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(Input.GetKeyDown("e"))
+        {
+            //Debug.Log("Interacted with: " + other.name);
+
+            //TODO: Needs to check for the Interact tag before doing this code.
+            //GameObject interactedObject = other.gameObject;
+            ObjectInteraction interactObject = other.gameObject.GetComponent<ObjectInteraction>();
+            interactObject.isUsed = !interactObject.isUsed;
+        }
+
     }
 
     /// <summary>
@@ -86,6 +107,7 @@ public class PlayerMovement : MonoBehaviour
             if (Physics.Linecast(transform.position, transform.position + (Vector3.down * 1.2f), LayerMask.GetMask("Ground", "StaticObject")))
             {
                 isJumping = false;
+                Debug.Log("Stopped Jumping :(");
             }
 
             //check every frame while character is jumping
