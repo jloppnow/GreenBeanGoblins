@@ -93,7 +93,8 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log("Interacted with: " + other.name);
             
             // Toggle if an object has been in use or not.
-            ObjectInteraction interactObject = other.gameObject.GetComponent<ObjectInteraction>();           
+            ObjectInteraction interactObject = other.gameObject.GetComponent<ObjectInteraction>();
+            interactObject.Interaction();
             interactObject.isUsed = !interactObject.isUsed;           
         }
     }

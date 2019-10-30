@@ -13,19 +13,25 @@ public class ObjectInteraction : MonoBehaviour
         
     }
 
+    public void Interaction()
+    {
+        if (gameObject.tag == "Interact-Switch") // Cause object interact to rotate.
+            interact.GetComponent<Animator>().SetBool("Interact", true);
+    }
+
     // Update is called once per frame
     void Update()
     {
         if(isUsed)
         {
-            if (gameObject.tag == "Interact-Switch") // Cause object interact to rotate.
-                interact.transform.Rotate(Vector3.forward);
-            else if (gameObject.tag == "Interact-SmallObject") // Update object to interact's location.
-            {
-                //Debug.Log("Picked up item:" + gameObject.name);
-                transform.position = interact.transform.position;
-                transform.Translate(Vector3.up);
-            }
+            //if (gameObject.tag == "Interact-Switch") // Cause object interact to rotate.
+            //    interact.transform.Rotate(Vector3.forward);
+            //else if (gameObject.tag == "Interact-SmallObject") // Update object to interact's location.
+            //{
+            //    //Debug.Log("Picked up item:" + gameObject.name);
+            //    transform.position = interact.transform.position;
+            //    transform.Translate(Vector3.up);
+            //}
                
         }   
         else if(gameObject.tag == "Interact-SmallObject")
