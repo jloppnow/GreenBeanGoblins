@@ -19,6 +19,10 @@ public class PlayerMovement : MonoBehaviour
 
     Animator anim = null; //Controls all of the character's animations (not used yet)
 
+    //Interaction variables
+    bool isCarrying = false;          //Stores if the character is holding an item or not.
+    GameObject objectCarrying = null; //Stores the current object being carried.
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,31 +68,56 @@ public class PlayerMovement : MonoBehaviour
                 //start a new task = coroutine plays outside of update
                 StartCoroutine(CheckGround());
                 isJumping = true; //the character is jumping                
-                transform.GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce);
-                Debug.Log("Start jumping!!");
+                transform.GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce);                
             }
 
             #endregion
+
+            if(Input.GetKeyDown("r") && isCarrying)
+            {
+               //Will be used later to "throw" an object. 
+            }
         }
     }
 
+    // Triggers used for interacting with switches, doors, etc.
     private void OnTriggerEnter(Collider other)
     {
         //Debug.Log("Entered trigger: " + other.name);
-    }
+    } 
 
     private void OnTriggerStay(Collider other)
     {
         if(Input.GetKeyDown("e"))
         {
             //Debug.Log("Interacted with: " + other.name);
-
-            //TODO: Needs to check for the Interact tag before doing this code.
-            //GameObject interactedObject = other.gameObject;
-            ObjectInteraction interactObject = other.gameObject.GetComponent<ObjectInteraction>();
-            interactObject.isUsed = !interactObject.isUsed;
+            
+            // Toggle if an object has been in use or not.
+            ObjectInteraction interactObject = other.gameObject.GetComponent<ObjectInteraction>();           
+            interactObject.isUsed = !interactObject.isUsed;           
         }
+    }
 
+    // Collisions used for interacting with physics objects.
+    private void OnCollisionEnter(Collision other)
+    {
+        //Debug.Log("Entered collision: " + other.gameObject.name);
+    }
+
+    private void OnCollisionStay(Collision other)
+    {
+        if (Input.GetKeyDown("e") && other.gameObject.tag == "Interact-SmallObject")
+        {
+            //Debug.Log("Interacted with: " + other.gameObject.name);
+
+            ObjectInteraction interactObject = other.gameObject.GetComponent<ObjectInteraction>();
+            Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+
+            // Toggle object in use, remove gravity for object, set object to character.
+            interactObject.isUsed = !interactObject.isUsed;
+            rb.useGravity = false;
+            interactObject.interact = gameObject;           
+        }
     }
 
     /// <summary>
@@ -106,8 +135,7 @@ public class PlayerMovement : MonoBehaviour
             //if the ground or an object is below the character, player is no longer is jumping
             if (Physics.Linecast(transform.position, transform.position + (Vector3.down * 1.2f), LayerMask.GetMask("Ground", "StaticObject")))
             {
-                isJumping = false;
-                Debug.Log("Stopped Jumping :(");
+                isJumping = false;                
             }
 
             //check every frame while character is jumping

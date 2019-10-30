@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectInteraction : MonoBehaviour
 {
-    [SerializeField] GameObject interact = null;
+    public GameObject interact = null;
     public bool isUsed = false;
 
     // Start is called before the first frame update
@@ -16,6 +16,23 @@ public class ObjectInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isUsed) interact.transform.Rotate(Vector3.forward);   
+        if(isUsed)
+        {
+            if (gameObject.tag == "Interact-Switch") // Cause object interact to rotate.
+                interact.transform.Rotate(Vector3.forward);
+            else if (gameObject.tag == "Interact-SmallObject") // Update object to interact's location.
+            {
+                //Debug.Log("Picked up item:" + gameObject.name);
+                transform.position = interact.transform.position;
+                transform.Translate(Vector3.up);
+            }
+               
+        }   
+        else if(gameObject.tag == "Interact-SmallObject")
+        {
+            // Set current object to use gravity again.
+            gameObject.GetComponent<Rigidbody>().useGravity = true;
+
+        }
     }
 }
