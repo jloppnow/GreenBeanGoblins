@@ -26,14 +26,14 @@ public class ObjectInteraction : MonoBehaviour
         {
             //if (gameObject.tag == "Interact-Switch") // Cause object interact to rotate.
             //    interact.transform.Rotate(Vector3.forward);
-            //else if (gameObject.tag == "Interact-SmallObject") // Update object to interact's location.
-            //{
-            //    //Debug.Log("Picked up item:" + gameObject.name);
-            //    transform.position = interact.transform.position;
-            //    transform.Translate(Vector3.up);
-            //}
-               
-        }   
+            if (gameObject.tag == "Interact-SmallObject") // Update object to interact's location.
+            {
+                //Debug.Log("Picked up item:" + gameObject.name);
+                transform.position = interact.transform.position;
+                transform.Translate(Vector3.up);
+            }
+
+        }
         else if(gameObject.tag == "Interact-SmallObject")
         {
             // Set current object to use gravity again.
