@@ -83,7 +83,9 @@ public class PlayerMovement : MonoBehaviour
     // Triggers used for interacting with switches, doors, etc.
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("Entered trigger: " + other.name);
+        //Debug.Log("Entered trigger: " + other.name);   
+        if(other.gameObject.tag == "Interact-PressurePlate")
+            setInteractStatus(other.gameObject.GetComponent<ObjectInteraction>(), true);
     } 
 
     private void OnTriggerStay(Collider other)
@@ -93,10 +95,17 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log("Interacted with: " + other.name);
             
             // Toggle if an object has been in use or not.
-            ObjectInteraction interactObject = other.gameObject.GetComponent<ObjectInteraction>();
+            ObjectInteraction interactObject = other.gameObject.GetComponent<ObjectInteraction>();           
+            interactObject.isUsed = !interactObject.isUsed;
             interactObject.Interaction();
-            interactObject.isUsed = !interactObject.isUsed;           
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        //Debug.Log("Left trigger: " + other.name);
+        if (other.gameObject.tag == "Interact-PressurePlate")
+            setInteractStatus(other.gameObject.GetComponent<ObjectInteraction>(), false);
     }
 
     // Collisions used for interacting with physics objects.
@@ -119,6 +128,12 @@ public class PlayerMovement : MonoBehaviour
             rb.useGravity = false;
             interactObject.interact = gameObject;           
         }
+    }
+
+    private void setInteractStatus(ObjectInteraction obj, bool status)
+    {
+        obj.isUsed = status;
+        obj.Interaction();
     }
 
     /// <summary>

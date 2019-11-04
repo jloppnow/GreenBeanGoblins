@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - StaticObject
+  - Interact-Switch
+  - Interact-SmallObject
+  - Interact-PressurePlate
   layers:
   - Default
   - TransparentFX

@@ -15,8 +15,8 @@ public class ObjectInteraction : MonoBehaviour
 
     public void Interaction()
     {
-        if (gameObject.tag == "Interact-Switch") // Cause object interact to play an animation.
-            interact.GetComponent<Animator>().SetBool("Interact", isUsed);
+        //if (gameObject.tag == "Interact-Switch") // Cause object interact to play an animation.
+        interact.GetComponent<Animator>().SetBool("Interact", isUsed);
     }
 
     // Update is called once per frame
@@ -31,14 +31,12 @@ public class ObjectInteraction : MonoBehaviour
                 //Debug.Log("Picked up item:" + gameObject.name);
                 transform.position = interact.transform.position;
                 transform.Translate(Vector3.up);
-            }
-
+            }       
         }
         else if(gameObject.tag == "Interact-SmallObject")
         {
             // Set current object to use gravity again.
             gameObject.GetComponent<Rigidbody>().useGravity = true;
-
         }
     }
 }
