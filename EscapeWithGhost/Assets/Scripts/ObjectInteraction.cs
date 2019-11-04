@@ -15,8 +15,8 @@ public class ObjectInteraction : MonoBehaviour
 
     public void Interaction()
     {
-        if (gameObject.tag == "Interact-Switch") // Cause object interact to rotate.
-            interact.GetComponent<Animator>().SetBool("Interact", true);
+        if (gameObject.tag == "Interact-Switch") // Cause object interact to play an animation.
+            interact.GetComponent<Animator>().SetBool("Interact", isUsed);
     }
 
     // Update is called once per frame
