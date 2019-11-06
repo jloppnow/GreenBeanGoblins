@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GhostMovement : MonoBehaviour
 {
+    Rigidbody rbody = null;
     int mainLayer;
 
     [SerializeField]
@@ -39,11 +40,12 @@ public class GhostMovement : MonoBehaviour
     void Start()
     {
         mainLayer = gameObject.layer;
+        rbody = GetComponent<Rigidbody>();
     }
 
     public void Move(Vector3 direction)
     {
-        transform.root.Translate(direction * moveSpeed * Time.deltaTime, Space.Self);
+        rbody.transform.Translate(direction * moveSpeed * Time.deltaTime, Space.Self);
 
         //set triggers for Animator Controller
     }
@@ -141,11 +143,12 @@ public class GhostMovement : MonoBehaviour
             //if the object can be possessed
             if (!hitTransform.CompareTag("StaticObject"))
             {
-                transform.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                rbody.velocity = Vector3.zero;
                 transform.GetComponent<Collider>().enabled = false;
                 transform.position = hitTransform.gameObject.transform.position;
                 transform.rotation = hitTransform.rotation;
                 transform.parent = hitTransform;
+                rbody = transform.parent.GetComponent<Rigidbody>();
                 gameObject.layer = hitTransform.gameObject.layer;
                 LockSettings(true, false, true, false);
 
@@ -174,14 +177,14 @@ public class GhostMovement : MonoBehaviour
     IEnumerator ExpelFromObject()
     {
         bool SafeAway = false;
-        Rigidbody rbody = gameObject.GetComponent<Rigidbody>();
+        rbody = gameObject.GetComponent<Rigidbody>();
         canInput = false;
 
         while (!SafeAway)
         {
             rbody.AddForce(Vector3.up * expelForce);
 
-            Collider[] colliders = Physics.OverlapSphere(transform.position, transform.GetComponent<SphereCollider>().radius);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, transform.GetComponent<SphereCollider>().radius, LayerMask.GetMask("GhostLayer"));
             if (colliders.Length <= 1)
                 SafeAway = true;
 
