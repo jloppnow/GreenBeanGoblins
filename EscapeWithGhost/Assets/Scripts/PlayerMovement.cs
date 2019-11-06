@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class Heart
+{
+    public GameObject goodHeart = null;
+    public GameObject deadHeart = null;
+}
+
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,7 +18,16 @@ public class PlayerMovement : MonoBehaviour
     bool canInput = true; //check for if user can control the player
 
     [SerializeField]
+    int MaxHealth = 3;
+    [SerializeField]
+    int Health = 0;
+    [SerializeField]
+    Heart[] hearts = null;
+
+    [SerializeField]
     float moveSpeed = 3.0f; //the speed at which the player can move
+    [SerializeField]
+    float turnSpeed = 90.0f;
     [SerializeField]
     float jumpForce = 50.0f; //how powerful the character's jump is
     [SerializeField]
@@ -29,6 +45,10 @@ public class PlayerMovement : MonoBehaviour
         //Get the animator if there is one (not used yet)
         anim = GetComponent<Animator>();
 
+        if (hearts != null)
+            MaxHealth = hearts.Length;
+
+        Health = MaxHealth;
     }
 
     /// <summary>
@@ -55,7 +75,10 @@ public class PlayerMovement : MonoBehaviour
             float vertAxis = Input.GetAxis("Axis2_P" + playerIndex); //vertical axis (forward/back)
 
             if (horizAxis > 0 || horizAxis < 0)
+            {
                 Move(Vector3.right * horizAxis);
+                transform.Rotate(Vector3.up * turnSpeed * horizAxis * Time.deltaTime);
+            }
 
             if (vertAxis < 0 || vertAxis > 0)
                 Move(Vector3.forward * -vertAxis);
@@ -77,6 +100,28 @@ public class PlayerMovement : MonoBehaviour
             {
                //Will be used later to "throw" an object. 
             }
+        }
+    }
+
+    public void DamagePlayer(int amount)
+    {
+        Health -= amount;
+
+        for (int i = hearts.Length - 1; i >= 0; i --)
+        {
+            if (hearts[i].goodHeart.activeSelf)
+            {
+                amount--;
+                hearts[i].goodHeart.SetActive(false);
+                hearts[i].deadHeart.SetActive(true);
+            }
+        }
+
+        if (Health <= 0)
+        {
+            Health = 0;
+            Time.timeScale = 0; //freezes the game during runtime
+            Debug.Log("Player is Dead.");
         }
     }
 
