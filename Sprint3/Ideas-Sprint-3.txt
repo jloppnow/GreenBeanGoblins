@@ -4,10 +4,16 @@ Ideas
 - a collection of superheroes (original)
 - choose which superhero to perform which tasks
 - Hilarious implementation: Little Timmy being flown through building
-- 
+
 - Tasks:
 	- Picking Timmy up from Soccer
 	- Cooking Dinner
 	- Deliveries
 	- "Garbage Pickup"
 	- Repairs
+- Superpowers
+	- Flying
+	- Super strength
+	- laser beams
+	- Time control
+	- Weather Control
