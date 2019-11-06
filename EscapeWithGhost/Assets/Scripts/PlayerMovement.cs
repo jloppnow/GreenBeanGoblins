@@ -114,6 +114,9 @@ public class PlayerMovement : MonoBehaviour
                 amount--;
                 hearts[i].goodHeart.SetActive(false);
                 hearts[i].deadHeart.SetActive(true);
+
+                if (amount <= 0)
+                    break;
             }
         }
 

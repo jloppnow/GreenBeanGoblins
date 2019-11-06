@@ -12,13 +12,15 @@ public class PlayerHealthDamage : MonoBehaviour
         
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         isTouching = true;
-    }
-    public void OnCollisionEnter(Collision collision)
-    {
         if (collision.transform.tag == "Enemy")
             Health -= 1;
     }
+    //public void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.transform.tag == "Enemy")
+    //        Health -= 1;
+    //}
 }

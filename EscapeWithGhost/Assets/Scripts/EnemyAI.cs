@@ -75,5 +75,16 @@ public class EnemyAI : MonoBehaviour
         }
         isWandering = false;
     }
-   
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("HI");
+
+        //isTouching = true;
+        if (collision.transform.tag == "Player")
+        {
+            Debug.Log("Damage");
+            collision.transform.GetComponent<PlayerMovement>().DamagePlayer(1);
+        }
+    }
 }
