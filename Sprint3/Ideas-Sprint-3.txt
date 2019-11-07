@@ -15,5 +15,7 @@ Ideas
 	- Flying
 	- Super strength
 	- laser beams
-	- Time control
+	* Time control
 	- Weather Control
+	- X-ray vision
+	- Superspeed
